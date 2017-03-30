@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="HelloWorld" basedir="." default="main“>
+
+	<!--ant初始变量设置-->
+	<property name="src.dir" value="src"/>
+	
+	<property name="build.dir" value="build"/>
+	<property name="classes.dir" value="${build.dir}/classes"/>
+	<property name="jar.dir" value="${build.dir}/jar"/>
+	
+	<property name="main-class" value="cn.jerry.HelloWorld"/>
+	
+	<!--ant清空目标设置-->
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+	</target>
+	
+	<!--ant编译目标设置-->
+	<target name="compile">
+		<mkdir dir="${classes.dir}"/>
+		<javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+	</target>
+	
+	<!--ant输出目标配置-->
+	<target name="jar" depends="compile">
+		<mkdir dir="${jar.dir}"/>
+		<jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="${main-class}"/>
+			</manifest>
+		</jar>
+	</target>
+	
+	<!--ant运行目标配置-->
+	<target name="run" depends="jar">
+		<java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
+	</target>
+	
+	<!--ant清除编译目标配置-->
+	<target name="clean-build" depends="clean,jar"/>
+	
+	<!--ant主进程目标配置-->
+	<target name="main" depends="clean,run"/>
+	
+</project>
