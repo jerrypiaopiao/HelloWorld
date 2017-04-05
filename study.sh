@@ -2,3 +2,5 @@
 function showJerry(){
 	echo 'hello world'
 }
+
+showJerry
