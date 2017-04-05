@@ -1,6 +1,7 @@
 #!/bin/bash
 function showJerry(){
-	echo 'hello world'
+	echo $1
 }
 
 showJerry
+echo $1
